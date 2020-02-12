@@ -4,9 +4,10 @@ function [folderName] = make_folder(name,varargin)
     % names
     % The rest of the input variables are the values of corresponding
     % settings
-    for i=2:nargin-1
-        name = [name,'_',varargin{1}{i-1},'_',num2str(varargin{i})];
-
+    if ~isempty(varargin)
+        for i=2:nargin-1
+            name = [name,'_',varargin{1}{i-1},'_',num2str(varargin{i})];
+        end
     end
     folderName = name;
     if ~exist(folderName, 'dir')
