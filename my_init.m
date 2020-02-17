@@ -1,13 +1,13 @@
 clc; clear; close all;
 %% Figure environment setup
-set(0,'DefaultFigureWindowStyle','docked');
-set(0,'defaultfigurecolor',[1 1 1]);
-set(groot,'defaulttextinterpreter','latex');  
+set(groot, 'defaultFigureWindowStyle','docked');
+set(groot, 'defaultFigurecolor',[1 1 1]);
+set(groot, 'defaultTextinterpreter','latex');  
 set(groot, 'defaultAxesTickLabelInterpreter','latex');  
 set(groot, 'defaultLegendInterpreter','latex');
 set(groot, 'defaultColorbarTickLabelInterpreter','latex');
-set(0, 'DefaultAxesFontWeight', 'normal','DefaultAxesFontSize', 16);
-
+set(groot, 'defaultAxesFontWeight', 'normal','DefaultAxesFontSize', 16);
+set(groot, 'defaultFigureposition',[680   558   560   420]);
 %% Custom colormap
 my_map = cutsom_colormap(256);
 
