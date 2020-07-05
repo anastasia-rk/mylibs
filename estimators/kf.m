@@ -1,17 +1,18 @@
-function[x_posterior,P_posterior,lik] = kf(y,x,u,P,A,B,C,Q,R)
-    x_posterior = x;
-    x_prior     = A*x_posterior + B*u;    % prior mean
-    P_prior     = A*P*A' + Q;             % prior covariance
-    d_y         = y - C*x_prior;          % estimation error    
-    S           = C*P_prior*C' + R;       % error covariance
-    S_inv       = pinv(S);
-    K           = P_prior*C'*S_inv;       % Kalman gain
-    x_posterior = x_prior + K*d_y;        % ostrerior mean          
-    P_posterior = (eye(length(x)) - K*C)*P_prior; % posterior covariance
-    
-      
-    S_new = (abs(2*pi*S));
-    den = sqrt(det(S_new));
-    num = exp(-0.5*d_y'*S_inv*d_y);
-    lik   = num/den;
-end
+function[x_t1t1,P_t1t1,lik] = kf(y,x_tt,u,P_tt,A,B,C,Q,R)
+% tt = (t \mid t)
+% t1t = (t + 1 \mid t)
+% t1t1 = (t + 1 \mid t + 1)
+%% Estimation
+x_t1t   = A*x_tt + B*u;                                                     % prior mean
+P_t1t   = A*P_tt*A' + Q;                                                    % prior covariance
+d_y     = y - C*x_t1t;                                                      % estimation error    
+S       = C*P_t1t*C' + R;                                                   % error covariance
+S_inv   = pinv(S);
+K       = P_t1t*C'*S_inv;                                                   % Kalman gain
+x_t1t1  = x_t1t + K*d_y;                                                    % postrerior mean          
+P_t1t1  = (eye(length(x_tt)) - K*C)*P_t1t;                                  % posterior covariance
+%% model likelihood 
+S_new   = (abs(2*pi*S));
+den     = sqrt(det(S_new));
+num     = exp(-0.5*d_y'*S_inv*d_y);
+lik     = num/den;

@@ -1,0 +1,2 @@
+- two mass two spring system for modelling multi-timescale dynamics
+- continuous dynamics modelled and discretised at different time scales using zero-order hold

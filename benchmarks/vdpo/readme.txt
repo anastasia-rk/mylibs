@@ -1,0 +1,2 @@
+- Van der Pol oscilator with deterministic conservative excitation signal
+- dynamics modelled for different damping coefficient mu
